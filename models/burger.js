@@ -1,25 +1,30 @@
-// IMPORT ORM CONNECTIONconnection 
-config = require('../config/connection.js');
 
-// CALL ORM FUNCTION
+
+// IMPORT ORM CONNECTION
+var orm = require("../config/orm.js"); 
+
+
+ // CALL ORM FUNCTION
 var burger = {
-  all: function(cb) {
-    orm.all("burgers", function(res) {
+  selectAll: function(cb) {
+    orm.selectAll("burgers", function(res) {
+      cb(res);
+    });
+  },
+// inserting a new burger logic
+  insertOne: function(cols, vals, cb) {
+    orm.insertOne("burgers", cols, vals, function(res) {
+      cb(res);
+    });
+  },
+  
+ // updating burger logic
+  updateOne: function(objColVals, condition, cb) {
+    orm.updateOne("burgers", objColVals, condition, function(res) {
       cb(res);
     });
   },
 
-  // inserting a new burger logic
-  create: function(objColVal, condition, cb) {
-    orm.create("burgers", objColVal, condition, function(res) {
-      cb(res);
-    });
-  },
-  // updating burger logic
-  update: function(cols, value, cb) {
-    orm.update("burgers", cols, value, function(res) {
-      cb(res);
-    });
-  }
 };
+
 module.exports = burger;
