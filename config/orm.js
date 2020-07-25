@@ -1,9 +1,6 @@
-// var connected = require(".../config/connection.js"); 
+var connection = require("../config/connection");
 
-config = require('../config/config');
-
-
-function printQuestionMarks(num) {
+function createQmarks(num) {
   var arr = [];
   for (var i = 0; i < num; i++) {
     arr.push("?");
@@ -11,7 +8,7 @@ function printQuestionMarks(num) {
   return arr.toString();
 }
 
-function objToSql(ob) {
+function translateSql(ob) {
   var arr = [];
   for (var key in ob) {
     var value = ob[key];
@@ -26,49 +23,54 @@ function objToSql(ob) {
 }
 
 var orm = {
-  all: function(table, cb) {
-    var queryString = "SELECT * FROM " + table + ";";
+  selectAll: function(table, cb) {
+    var dbQuery = "SELECT * FROM " + table + ";";
 
-    connected.query(queryString, function(err, result) {
+    connection.query(dbQuery, function(err, res) {
       if (err) {
         throw err;
       }
-      cb(result);
+      cb(res);
     });
   },
-  create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
+  insertOne: function(table, cols, vals, cb) {
+    var dbQuery =
+      "INSERT INTO " +
+      table +
+      " (" +
+      cols.toString() +
+      ") " +
+      "VALUES (" +
+      createQmarks(vals.length) +
+      ") ";
 
-    console.log(queryString);
-
-    connected.query(queryString, vals, function(err, result) {
+    console.log(dbQuery);
+    connection.query(dbQuery, vals, function(err, res) {
       if (err) {
         throw err;
       }
-      cb(result);
+      cb(res);
     });
   },
-  update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
+  updateOne: function(table, objColVals, condition, cb) {
+    var dbQuery =
+      "UPDATE " +
+      table +
+      " SET " +
+      translateSql(objColVals) +
+      " WHERE " +
+      condition;
 
-    console.log(queryString);
+    console.log(dbQuery);
 
-    connected.query(queryString, function(err, result) {
+    connection.query(dbQuery, function(err, res) {
       if (err) {
         throw err;
       }
-      cb(result);
+      cb(res);
     });
-  }
+  },
+ 
+  
 };
 module.exports = orm;
