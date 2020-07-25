@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3130;
 // Serve static content 
 app.use(express.static("public"));
 
