@@ -1,0 +1,27 @@
+{
+  "name": "burgerapp",
+  "version": "1.0.0",
+  "description": "eat a burger",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sadia110/HandleBars-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sadia110/HandleBars-/issues"
+  },
+  "homepage": "https://github.com/sadia110/HandleBars-#readme",
+  "dependencies": {
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "handlebars": "^4.7.6",
+    "mysql": "^2.18.1"
+  }
+}
