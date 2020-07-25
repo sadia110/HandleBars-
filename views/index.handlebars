@@ -1,56 +1,86 @@
 <div class="container">
-  <h1 id="animaterubberBand">Eat a Burgers!</h1>
-</div>
-<!-- Spacers from title-->
-<div class="container">
-  <div class="col-lg-12">
-  </div>
-</div>
-<div class="container">
-  <div class="col-lg-12">
-  </div>
-</div>
-<!-- Adding new burgers -->
-<div class="container">
-  <div class="col-sm-6 text-center">
-    <h4 class="text">Get new burger!</h4>
-    <form class="button-size" action="/api/burgers" method="POST">
-      <input type="text" class="text-center" id="insertBurger" name="burger_name"
-        placeholder="Insert new burger"></input>
-      <span class="input-group-btn">
-        <button type="submit" class="insertBurgerBtn btn btn-primary">Submit</button>
-      </span>
-    </form>
-  </div>   
+{{!--  --}}
+    <div class="jumbotron">
+        <h1>Eat a burger </h1>
+        <br> 
 
-    <!-- Burger meniu -->
+        <!-- Adding new burgers -->
 
-  <div class="row">
-    <div class="col-sm-6">
-      <h4 class="text-center burgermenu">Burgers to be Devoured!!:</h4>
-      {{#each burger}} {{#unless this.devoured}}
-      <form>
-        <div class="input-group">
-          <input type="hidden" name="devoured" value="true">
-          <li class="form-control uneaten">{{this.burger_name}}</li>
-          <span class="input-group-btn">
-            <button class="eatBurg btn btn-info" data-id="{{id}}" type="submit">Devour It!</button>
-          </span>
-        </div>
-      </form>
-      {{/unless}} {{/each}}
+        <panel>
+            <form class="create-form">
+                <div class="form-group">
+                    <label for="newburger">Order Burger</label>
+                    {{!-- <input type="text" id="newburger" name="burger"> --}}
+                    <select data-placeholder="" id="newburger" name="burger">
+                        <option value="Nothing Selected" selected>Please Select a Sandwich</option>
+                        <option value="Hamburger"> Old fashion Hamburger</option>
+                        <option value="CheeseBurger">CheeseBurger</option>
+                        <option value="DoubleBfChz">Double Up (double meat and cheese)</option>
+                        <option value="VeggieBurger">Veggie Burger</option>
+                        <option value="PulledPork">Pulled Pork Sandwich</option>
+                        <option value="ChichenClub">Chicken Club Sandwich</option>
+                        <option value="SteaknChz">Steak and Cheese Sandwich</option>
+                    </select> 
+
+                    <button type="submit" class="insertBurgerBtn btn btn-primary">Submit</button> id="addburger">
+                        {{!-- <span class="fa fa-thumbs-up"></span> --}}
+                    </button>
+                </div>
+            </form>
+        </panel>
     </div> 
 
+        <!-- Burger meniu -->
 
-    <div class="col-sm-6">
-      <h4 class="text-center eaten">Eaten Burgers:</h4>
-      {{#each burger}} {{#if this.devoured}}
-      <div>
-        <li class="form-control devoured">{{this.burger_name}}</li>
-      </div>
-      </form>
-      {{/if}} {{/each}}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="leftside"><strong>Burgers to be Devoured..</strong>
+                </div>
+                <div class="panel-body">
+
+                    <ul>
+                        {{#each burgers}}
+                        {{#unless devoured}}
+
+                        <span><strong> {{this.id}} - {{this.burger_name}}</strong></span>
+                        <button type="button" class="eatburger btn btn-warning" id="eatbutton" data-id="{{this.id}}"
+                            data-newDevoured="{{devour}}"><span class="fa fa-usd"></span></button>
+                        <hr>
+                        {{/unless}}
+                        {{/each}}
+                    </ul>
+
+                </div>
+            </div>
+        </div> 
+
+        {{!-- Burger Devoured --}}
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="rightside"><strong>Devour it!</strong>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        {{#each burgers}}
+                        {{#if devoured}}
+                        <span><strong> {{this.id}} - {{this.burger_name}}</strong></span>
+                             {{devour}}<span ></span></button>
+                        <hr>
+                        {{/if}}
+                        {{/each}}
+                    </ul>
+
+
+
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div>
-  <br>
 </div>
+
+
+
+
+
