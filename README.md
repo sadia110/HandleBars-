@@ -7,12 +7,12 @@ A burger app , where you choose the burger of your choice , which is added to th
 
 ## Tech 
 
-MySQL -
-Node 
-Javascript 
-Express
-Handlebars 
-MVC
+- MySQL -
+- Node 
+- Javascript 
+- Express
+- Handlebars 
+- MVC
 
 ## Usage 
 Fork respo, in command line install :
