@@ -1,0 +1,54 @@
+<div class="container">
+  <h1 id="animaterubberBand">Eat Tha Burgers!</h1>
+</div>
+<!-- Spacers from title-->
+<div class="container">
+  <div class="col-lg-12">
+  </div>
+</div>
+<div class="container">
+  <div class="col-lg-12">
+  </div>
+</div>
+<!-- Adding new burgers -->
+<div class="container">
+  <div class="col-sm-6 text-center">
+    <h4 class="text">Get a burger!</h4>
+    <form class="button-size" action="/api/burgers" method="POST">
+      <input type="text" class="text-center" id="insertBurger" name="burger_name"
+        placeholder="Insert new burger"></input>
+      <span class="input-group-btn">
+        <button type="submit" class="insertBurgerBtn btn btn-primary">Submit</button>
+      </span>
+    </form>
+  </div>
+  <!-- Burger menu -->
+  <div class="row">
+    <div class="col-sm-6">
+      <h4 class="text-center burgermenu"> Burgers on the Menu :</h4>
+      {{#each burger}} {{#unless this.devoured}}
+      <form>
+        <div class="input-group">
+          <input type="hidden" name="devoured" value="true">
+          <li class="form-control uneaten">{{this.burger_name}}</li>
+          <span class="input-group-btn">
+            <button class="eatBurg btn btn-info" data-id="{{id}}" type="submit">Devour It!</button>
+          </span>
+        </div>
+      </form>
+      {{/unless}} {{/each}}
+    </div>
+    <!-- Devoured burgers list -->
+    <div class="col-sm-6">
+      <h4 class="text-center eaten"> Devoured:</h4>
+      {{#each burger}} {{#if this.devoured}}
+      <div>
+        <li class="form-control devoured">{{this.burger_name}}</li>
+      </div>
+      </form>
+      {{/if}} {{/each}}
+    </div>
+  </div>
+  <br>
+</div>
+<!-- devour button code --> 
